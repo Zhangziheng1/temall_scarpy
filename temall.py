@@ -24,7 +24,7 @@ import fangtang
 
 def flie_change(price):
     # 进入日志目录
-    os.chdir('/ziheng/pachong/logs')  # 进入logs目录
+    os.chdir('/root/pachong/logs')  # 进入logs目录
     time_filename = str(time.strftime('%Y.%m.%d', time.localtime(time.time())))
     with open(time_filename+'.txt', 'a+') as f:
         f.write(str(price))
