@@ -5,32 +5,49 @@
 
 
 import datetime
-import re
 import os
+import re
+import time
+
 import requests
 
 import fangtang
 
 """
-1.由于爬取天猫这个东西需要用到cookie,需要替换自己的cookie
-2.方糖的key也需要换成自己的key
 3.fangtang为自己封装的一个api，用于推送服务器的消息给用户【这么说。。真要脸】
 4.目前天猫有个促销价格和优惠没有找到是哪个js文件，所以暂时先不写【搞一个单独的模块】
-5.价格对比没有想好怎么搞
-6.对于天猫有好几个不同的网址，所以在main()中设置了简单的host替换，如果不换就404
+5.对于天猫有好几个不同的网址，所以在main()中设置了简单的host替换，如果不换就404
 """
 
 # 将爬虫获取的数据写入本地，这里本来的预设是价格对比，目前没有想好怎么写，就暂时写一个存本地的模块
 
 
 def flie_change(price):
-    with open('price.txt', 'a+') as f:
+    # 进入日志目录
+    os.chdir('/ziheng/pachong/logs')  # 进入logs目录
+    time_filename = str(time.strftime('%Y.%m.%d', time.localtime(time.time())))
+    with open(time_filename+'.txt', 'a+') as f:
         f.write(str(price))
-        f.write('\t')
+        f.write('\n')
         f.write(str(datetime.datetime.now()))
         f.write('\n')
-        fangtang.shuju("今日检测价格,喵喵喵~", "今日份价格：" + str(price) +
-                       "获取时间：" + str(datetime.datetime.now()))
+    # 搞不明白为什么我写入了文件，然后再直接读出来，却还是之前没有写入的状态。辣鸡
+    with open(time_filename+'.txt', 'r') as f:
+        charge = f.readlines()
+    # 这里设置爬取数据的次数，并且进行计算
+    # 如果价格波动了就进行提醒，价格没有波动直接提醒【表示自己还活着】
+    if len(charge) == 2:
+        fangtang.shuju("当前为第一次爬取 直接返回数据", "价格为 "+str(price))
+    else:
+        charge_date = charge[-4:]
+        if float(charge_date[0]) > float(charge_date[2]):
+            fangtang.shuju("价格降低了嘞 喜大普奔 ",
+                           "可以考虑入手 但是要考虑好你的钱包 价格 ：" + charge_date[2])
+        elif float(charge_date[0]) < float(charge_date[2]):
+            fangtang.shuju("价格升高了嘞 嘤嘤嘤 ",
+                           "让你刚才不买 让你不买 不买 价格 ：" + charge_date[2])
+        else:
+            pass
 
 # 爬虫的主体
 
@@ -51,8 +68,8 @@ def url(url_new, header):
 
 
 def main():
-    # 读取本地url文件，获取temall的url地址
     os.chdir('/root/pachong')
+    # 读取本地url文件，获取temall的url地址
     with open('url.txt', 'r') as f:
         url_frist = f.readlines()
     ziheng = 0
