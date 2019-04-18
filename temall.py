@@ -38,16 +38,16 @@ def flie_change(title, post_money, price, other):
     # 这里设置爬取数据的次数，并且进行计算
     # 如果价格波动了就进行提醒，价格没有波动直接提醒【表示自己还活着】
     if len(charge) == 2:
-        fangtang.shuju("当前为第一次爬取 直接返回数据", " - 价格为【如果有优惠即为优惠价格，如果没有优惠就是原价】  " + str(
-            price) + "\n" + ' - 快递费'+str(post_money) + "\n" + " - 其他优惠信信息【未处理】" + "\n" + str(other))
+        fangtang.shuju(str(title), " - 价格为【如果有优惠即优惠价格，如果没有优惠即原价】  " + str(
+            price) + "\n" + ' - 快递费      '+str(post_money) + "\n" + " - 其他优惠信信息【未处理】" + "\n" + str(other))
     else:
         charge_date = charge[-4:]
         if float(charge_date[0]) > float(charge_date[2]):
-            fangtang.shuju("价格降低了嘞 喜大普奔 ",
-                           "可以考虑入手 但是要考虑好你的钱包" + "\n" + " - 价格为【如果有优惠即为优惠价格，如果没有优惠就是原价】 ：" + charge_date[2]+"\n" + ' - 快递费'+str(post_money) + "  - 其他优惠信信息【未处理】" + "\n" + str(other))
+            fangtang.shuju("价格降低了嘞 喜大普奔 ", str(title) +
+                           " - 可以考虑入手 但是要考虑好你的钱包" + "\n" + " - 价格为【如果有优惠即优惠价格，如果没有优惠即原价】 " + charge_date[2] + "\n" + ' - 快递费'+str(post_money) + "\n" + "  - 其他优惠信信息【未处理】" + "\n" + str(other))
         elif float(charge_date[0]) < float(charge_date[2]):
-            fangtang.shuju("价格升高了嘞 嘤嘤嘤 ",
-                           "让你刚才不买 让你不买 不买" + "\n" + " - 价格为【如果有优惠即为优惠价格，如果没有优惠就是原价】 ：" + charge_date[2]+"\n" + ' - 快递费'+str(post_money) + "  - 其他优惠信信息【未处理】" + "\n" + str(other))
+            fangtang.shuju("价格升高了嘞 嘤嘤嘤 ", str(title) +
+                           " - 让你刚才不买 让你不买 不买" + "\n" + " - 价格为【如果有优惠即优惠价格，如果没有优惠即原价】 " + charge_date[2]+"\n" + ' - 快递费'+str(post_money) + "\n" + "  - 其他优惠信信息【未处理】" + "\n" + str(other))
         else:
             pass
 
