@@ -14,5 +14,5 @@
 
 ## url 编辑规则
  -  https://detail.m.tmall.com/item.htm?id= + 【这里是所需要爬取商品的ID，具体就不多描述】+ &toSite=main
- 
+ - 提交了一个示例的logs文件夹以及其中的日志爬取文件
  - 按照上面的规则就可以编辑出一条重定向在30以内的url，满足request库的要求，同样用手机的头去访问 get it！
