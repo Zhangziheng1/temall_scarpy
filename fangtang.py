@@ -21,7 +21,7 @@ import requests
 
 
 def shuju(text,desp):
-    url = "https://sc.ftqq.com/__YOUR_KEY___.send"
+    url = "https://sc.ftqq.com/__YOUR_KEY__.send"
     data = {
         'text':text,
         'desp':desp
