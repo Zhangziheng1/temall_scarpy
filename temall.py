@@ -72,7 +72,7 @@ def url(url_new, header):
         return False
 
 def main():
-    os.chdir('/__YOUR_FLIE__/)
+    os.chdir('/__YOUR_FLIE__/')
     # 读取本地url文件，获取temall的url地址
     with open('url.txt', 'r') as f:
         url_frist = f.readlines()
@@ -97,7 +97,7 @@ def main():
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
         'Connection': 'keep-alive',
-        'Cookie': __YOUR_COOKIE__
+        'Cookie': __YOUR_COOKIE__,
         'Upgrade-Insecure-Requests': '1',
         'TE': 'Trailers'
         }
