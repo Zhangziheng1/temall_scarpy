@@ -1,7 +1,7 @@
-# 2019/04/11
+# Author : ziheng_wind
+# Email : wn345361049@163.com
+# github : https://github.com/Zhangziheng1/temall_scarpy
 # -*- coding: utf-8 -*-
-
-
 
 """
 封装的方糖，key可以更换成自己的key，
